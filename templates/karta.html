@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ning Budaya Songak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='logo.png') }}" rel="icon" type="image/x-icon" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Quicksand:300,300i,400,400i,600,600i,700,700i|Open Sans:300,300i,400,400i,600,600i,700,700i"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9ecef;
+        }
+
+        .container-structure {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .box {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1.5;
+            color: #333;
+            border-radius: 15px;
+            background-color: #d1e7dd;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
+        }
+        .box strong{
+            font-family: "Quicksand", sans-serif;
+        }
+
+        .box:hover {
+            box-shadow: 0 8px 30px rgb(0, 0, 0);
+            transform: translateY(-5px);
+            background-color: #c3e6cb;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border-color: #007bff;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(90deg, #0056b3, #004085);
+            border-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="container-structure">
+            <div class="mb-3">
+                <a href="/about" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Kembali
+                </a>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">PEMBINA<br><strong>Pihirudin, S.Ak</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">KETUA<br><strong>Ahmad Muntazim Fathi</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">WAKIL KETUA<br><strong>Rifaldi, S.Pd</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">SEKRETARIS<br><strong>Beni Sapta Putra</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">BENDAHARA<br><strong>Era Fazira</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">BIDANG PENDIDIKAN DAN PELATIHAN<br><strong>Sanul Azhari</strong><br><strong>Aulia
+                            Mispantari, S.Pd</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">BIDANG USAHA KESEJAHTERAAN SOSIAL<br><strong>Andrina Anisa
+                            Putri</strong><br><strong>Zwinda</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">BIDANG HUMAS DAN KERJASAMA KEMITRAAN<br><strong>Nonik
+                            Santika</strong><br><strong>Wahyu Erlina, S.kom</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">BIDANG KEAGAMAAN<br><strong>Zainul Hirwan, QH</strong><br><strong>Joni Ramli,
+                            QH</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">BIDANG KEROHANIAN DAN PEMBINAAN MENTAL<br><strong>Usman,
+                            S.Pd</strong><br><strong>Lauhil Bariyah</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">BIDANG OLAHRAGA DAN SENI BUDAYA<br><strong>Budi Sahrul
+                            Nizam</strong><br><strong>Norma Andriani</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">BIDANG LINGKUNGAN HIDUP<br><strong>Rosi Septiana</strong><br><strong>Wahyu</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

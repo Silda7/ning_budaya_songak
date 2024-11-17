@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ning Budaya Songak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='logo.png') }}" rel="icon" type="image/x-icon" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Quicksand:300,300i,400,400i,600,600i,700,700i|Open Sans:300,300i,400,400i,600,600i,700,700i"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9ecef;
+        }
+
+        .container-structure {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .box {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.5;
+            color: #333;
+            border-radius: 15px;
+            background-color: #d1e7dd;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
+        }
+
+        .box strong{
+            font-family: "Quicksand", sans-serif;
+        }
+
+
+        .box:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            background-color: #c3e6cb;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border-color: #007bff;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(90deg, #0056b3, #004085);
+            border-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .mb-3 {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .box {
+                font-size: 18px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="container-structure">
+            <div class="mb-3">
+                <a href="/about" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Kembali
+                </a>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">Ketua<br><strong>Usman, S.Pd</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">Sekretaris<br><strong>Winda Yuda Hadriyanti S.Pd</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">Wakil<br><strong>Ustadz Anwar S.Pd I</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">Bendahara<br><strong>Ratna Kusuma QH</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">Humas<br><strong>Nonik Santika</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">Publikasi<br><strong>Sanul Azhari</strong></div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="box">Kemasyarakatan<br><strong>Taufiq Qurriadi QH</strong></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box">Kepemudaan<br><strong>Budi Sahrul Nizam S.Par</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

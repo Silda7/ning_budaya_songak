@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ning Budaya Songak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='logo.png') }}" rel="icon" type="image/x-icon" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Quicksand:300,300i,400,400i,600,600i,700,700i|Playfair Display:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,600,600i,700,700i|DM Serif Display:300,300i,400,400i,600,600i,700,700i|Russo One:300,300i,400,400i,600,600i,700,700i|Jersey 20:300,300i,400,400i,600,600i,700,700i|Oleo Script:300,300i,400,400i,600,600i,700,700i|Orbitron:300,300i,400,400i,600,600i,700,700i|EB Garamond:300,300i,400,400i,600,600i,700,700i|Cormorant Garamond:300,300i,400,400i,600,600i,700,700i|Itim:300,300i,400,400i,600,600i,700,700i"
+        rel="stylesheet">
+    <style>
+        .navbar-brand {
+            font-family: "Russo One", sans-serif;
+            font-size: 30px;
+        }
+
+        .nav-item .nav-link {
+            font-family: "Russo One", sans-serif;
+            font-size: 18px;
+        }
+
+        .navbar {
+            background-color: hsl(0, 0%, 100%) !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-toggler {
+            border: 2px solid rgb(255, 255, 255);
+            background-color: rgba(45, 83, 4, 0.397);
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after,
+        .navbar-toggler-icon div {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+        }
+
+        .navbar-toggler-icon::before {
+            top: 6px;
+        }
+
+        .navbar-toggler-icon::after {
+            bottom: 6px;
+        }
+
+        .navbar-toggler-icon div {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dropdown-menu {
+            max-width: 300px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            font-family: "Jersey 20", sans-serif;
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        body {
+            background: #ffffff68;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        .lead {
+            color: #aaa;
+        }
+
+        .wrapper {
+            margin: 10vh;
+        }
+
+        .card {
+            border: none;
+            transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+            min-height: 300px;
+            box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+
+            @media (max-width: 768px) {
+                min-height: 350px;
+            }
+
+            @media (max-width: 420px) {
+                min-height: 300px;
+            }
+
+            &.card-has-bg {
+                transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: inherit;
+                    filter: grayscale(100%);
+                }
+
+                &:hover {
+                    transform: scale(0.98);
+                    box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.8);
+                    background-size: 130%;
+                    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+                    .card-img-overlay {
+                        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+                        background: rgb(0, 123, 255);
+                        background: linear-gradient(0deg, rgba(92, 12, 12, 0.274) 0%, rgba(66, 10, 10, 0.285) 100%);
+                    }
+                }
+            }
+
+            .card-footer {
+                background: none;
+                border-top: none;
+
+                .media {
+                    img {
+                        border: solid 3px rgba(255, 255, 255, 0.3);
+                    }
+                }
+            }
+
+            .card-footer {
+                display: flex;
+                justify-content: center;
+                padding: 10px;
+            }
+
+            .button-group {
+                display: flex;
+                gap: 10px;
+            }
+
+            .card-title {
+                font-weight: 800;
+                font-family: "Oleo Script", system-ui;
+            }
+
+            .card-meta {
+                color: rgba(0, 0, 0, 0.3);
+                text-transform: uppercase;
+                font-weight: 500;
+                letter-spacing: 2px;
+            }
+
+            .card-body {
+                transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+            }
+
+            &:hover {
+                .card-body {
+                    margin-top: 30px;
+                    transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+                }
+
+                cursor: pointer;
+                transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+            }
+
+            .card-img-overlay {
+                transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+                background: rgb(0, 123, 255);
+                background: linear-gradient(0deg, rgba(0, 123, 255, 0.151) 0%, rgba(0, 123, 255, 0.403) 100%);
+                color: white;
+            }
+        }
+
+        .first {
+            font-family: "Itim", cursive;
+        }
+
+        .second {
+            font-family: "EB Garamond", serif;
+            font-size: 20px;
+        }
+
+        .four {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 20px;
+        }
+
+        .edit-modal .modal-content {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-modal .modal-header {
+            background-color: #1c8b48;
+            color: #fff;
+            border-bottom: 1px solid #ddd;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .add-modal .modal-header h5 {
+            margin-bottom: 0;
+            font-family: "Orbitron", sans-serif;
+        }
+
+        .add-modal .modal-body {
+            padding: 20px;
+        }
+
+        .add-modal .modal-footer {
+            background-color: #f7f7f7;
+            border-top: 1px solid #ddd;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .add-modal .modal-footer button {
+            margin-right: 10px;
+        }
+
+        .add-modal .form-control {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .add-modal .form-control:focus {
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-modal label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-family: "DM Serif Display", serif;
+            font-size: 15px;
+        }
+
+        .edit-modal .modal-content {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-modal .modal-header {
+            background-color: #007bff;
+            color: #ffffff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .edit-modal .modal-header h5 {
+            margin-bottom: 0;
+            font-family: "Orbitron", sans-serif;
+        }
+
+        .edit-modal .modal-body {
+            padding: 20px;
+        }
+
+        .edit-modal .modal-footer {
+            background-color: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .edit-modal .modal-footer button {
+            margin-right: 10px;
+        }
+
+        .edit-modal .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .edit-modal .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+
+        .edit-modal label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-family: "DM Serif Display", serif;
+            font-size: 15px;
+            text-align: left;
+        }
+
+        .download-modal .modal-content {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .download-modal .modal-header {
+            background-color: #007bff;
+            color: #ffffff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .download-modal .modal-header h5 {
+            margin-bottom: 0;
+        }
+
+        .download-modal .modal-body {
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .download-modal .modal-footer {
+            background-color: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .download-modal .modal-footer button {
+            margin-right: 10px;
+        }
+
+        .download-modal .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .download-modal .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .download-modal .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .download-modal .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .delete-modal .modal-content {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .delete-modal .modal-header {
+            background-color: #d9534f;
+            color: #ffffff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 15px;
+        }
+
+        .delete-modal .modal-header h5 {
+            margin-bottom: 0;
+        }
+
+        .delete-modal .modal-body {
+            padding: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .delete-modal .modal-footer {
+            background-color: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 15px;
+            justify-content: center;
+        }
+
+        .delete-modal .modal-footer button {
+            margin-right: 10px;
+        }
+
+        .delete-modal .btn-danger {
+            background-color: #d9534f;
+            border: none;
+        }
+
+        .delete-modal .btn-danger:hover {
+            background-color: #c9302c;
+        }
+
+        .delete-modal .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .delete-modal .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .modal-content {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background-color: #a22424;
+            color: white;
+            border-bottom: 2px solid #971a1a;
+            font-size: 30px;
+        }
+
+        .modal-title{
+            font-weight: bold;
+            font-family: "Montserrat", sans-serif;
+            font-size: 30px;
+        }
+
+        .modal-body {
+            color: #333;
+        }
+
+        #modalImage {
+            max-width: 70%;
+            border-radius: 5px;
+        }
+
+        #downloadLink {
+            background-color: #a72828;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        #downloadLink:hover {
+            background-color: #218838;
+        }
+
+        #imageDescription {
+            color: #6c757d;
+            font-family: "Quicksand", sans-serif;
+            text-align: justify;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+        .col {
+            padding: 0 15px;
+        }
+
+        .btn {
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            font-family: "Playfair Display", serif;
+        }
+
+        .btn-secondary {
+            background-color: #0872c8;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7d0d0d;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .d-flex {
+            align-items: flex-start
+        }
+
+        .mt-5 {
+            margin-top: 3rem;
+        }
+
+        .justified-text {
+            text-align: justify;
+        }
+    </style>
+    <script>
+        function showDeleteModal() {
+            $('#detailDeleteModal').modal('show');
+        }
+
+        function showAddModal() {
+            $('#detaiAddModal').modal('show');
+        }
+        function showEditModal() {
+            $('#detailEditModal').modal('show');
+        }
+        function showImageModal() {
+            $('#detailImageModal').modal('show');
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <img src="../static/logo.png" alt="" width="50" height="50" style="padding: 0; color:rgb(0, 0, 0)">
+                <a class="navbar-brand">Ning Budaya Songak</a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="budayaDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(0, 0, 0)">
+                            Budaya
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a href="/sejarah-songak" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-globe-asia-australia" viewBox="0 0 16 16">
+                                        <path
+                                            d="m10.495 6.92 1.278-.619a.483.483 0 0 0 .126-.782c-.252-.244-.682-.139-.932.107-.23.226-.513.373-.816.53l-.102.054c-.338.178-.264.626.1.736a.48.48 0 0 0 .346-.027ZM7.741 9.808V9.78a.413.413 0 1 1 .783.183l-.22.443a.6.6 0 0 1-.12.167l-.193.185a.36.36 0 1 1-.5-.516l.112-.108a.45.45 0 0 0 .138-.326M5.672 12.5l.482.233A.386.386 0 1 0 6.32 12h-.416a.7.7 0 0 1-.419-.139l-.277-.206a.302.302 0 1 0-.298.52z" />
+                                        <path
+                                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1.612 10.867l.756-1.288a1 1 0 0 1 1.545-.225l1.074 1.005a.986.986 0 0 0 1.36-.011l.038-.037a.88.88 0 0 0 .26-.755c-.075-.548.37-1.033.92-1.099.728-.086 1.587-.324 1.728-.957.086-.386-.114-.83-.361-1.2-.207-.312 0-.8.374-.8.123 0 .24-.055.318-.15l.393-.474c.196-.237.491-.368.797-.403.554-.064 1.407-.277 1.583-.973.098-.391-.192-.634-.484-.88-.254-.212-.51-.426-.515-.741a7 7 0 0 1 3.425 7.692 1 1 0 0 0-.087-.063l-.316-.204a1 1 0 0 0-.977-.06l-.169.082a1 1 0 0 1-.741.051l-1.021-.329A1 1 0 0 0 11.205 9h-.165a1 1 0 0 0-.945.674l-.172.499a1 1 0 0 1-.404.514l-.802.518a1 1 0 0 0-.458.84v.455a1 1 0 0 0 1 1h.257a1 1 0 0 1 .542.16l.762.49a1 1 0 0 0 .283.126 7 7 0 0 1-9.49-3.409Z" />
+                                    </svg> <b>Sejarah</b>
+                                </a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a href="/adat" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z" />
+                                        <path
+                                            d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+                                        <path
+                                            d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+                                    </svg> <b>Adat</b>
+                                </a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a href="/kesenian" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-image-alt" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0m4.225 4.053a.5.5 0 0 0-.577.093l-3.71 4.71-2.66-2.772a.5.5 0 0 0-.63.062L.002 13v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4.5z" />
+                                    </svg> <b>Kesenian</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/postingan">Postingan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(0, 0, 0)">
+                            <i class="fa-solid fa-user"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if not logged_in %}
+                            <li>
+                                <a href="/signin" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(0, 0, 0)" width="25"
+                                        height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                        <path
+                                            d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z " />
+                                    </svg> Login
+                                </a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="/logout" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(0, 0, 0)" width="25"
+                                        height="25" fill="currentColor" class="bi bi-box-arrow-right"
+                                        viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                        <path fill-rule="evenodd"
+                                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                                    </svg> Logout
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center mt-5">
+                    <div class="d-flex justify-content-between">
+                        {% if is_admin %}
+                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addDataModal">Add
+                            Data</button>
+                        {% endif %}
+                        <!-- Search Form -->
+                        <form class="d-flex" action="{{ url_for('search_postingan') }}" method="GET">
+                            <input class="form-control me-2" type="search" name="query" placeholder="Search"
+                                aria-label="Search">
+                            <button class="btn btn-secondary" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row" id="eventContainer">
+                    {% for dokumentasi in postingan_list %}
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mt-5">
+                        <div class="card text-dark card-has-bg click-col"
+                            style="background-image: url('/static/kegiatan/{{ dokumentasi.foto_kegiatan }}');"
+                            data-bs-toggle="modal" data-bs-target="#detailImageModal{{ dokumentasi._id }}">
+                            <div class="card-img-overlay d-flex flex-column">
+                                <div class="card-body">
+                                    <h4 class="card-title mt-0">{{ dokumentasi.judul_kegiatan }}</h4>
+                                    <small>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                                        </svg>
+                                        <b>{{ dokumentasi.tanggal_kegiatan_display }}</b>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Preview Modal -->
+                        <div class="modal fade" id="detailImageModal{{ dokumentasi._id }}" tabindex="-1"
+                            aria-labelledby="detailImageModalLabel{{ dokumentasi._id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg image-modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="detailImageModalLabel{{ dokumentasi._id }}">{{
+                                            dokumentasi.judul_kegiatan }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center"> 
+                                        <img src="/static/kegiatan/{{ dokumentasi.foto_kegiatan }}" id="modalImage"
+                                            class="img-fluid" alt="Image Preview">
+                                        <p id="imageDescription" class="mt-3 justified-text">{{
+                                            dokumentasi.deskripsi_kegiatan }}</p> 
+                                        <a href="/static/kegiatan/{{ dokumentasi.foto_kegiatan }}" id="downloadLink"
+                                            class="btn btn-primary" download>Download Image</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            {% if is_admin %}
+                            <div class="button-group">
+                                <button class="btn btn-primary" title="Edit" data-bs-toggle="modal"
+                                    data-bs-target="#detailEditModal{{ dokumentasi._id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                    </svg>
+                                </button>
+
+                                <!-- Edit Data Modal -->
+                                <div class="modal fade" id="detailEditModal{{ dokumentasi._id }}" tabindex="-1"
+                                    aria-labelledby="detailEditModalLabel{{ dokumentasi._id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered edit-modal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detailEditModalLabel{{ dokumentasi._id }}">
+                                                    Edit
+                                                    Data
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="/edit" enctype="multipart/form-data">
+                                                    <input type="hidden" name="dokumentasi_id"
+                                                        value="{{ dokumentasi._id }}">
+                                                    <div class="mb-3">
+                                                        <label for="editJudul" class="form-label">Judul</label>
+                                                        <input type="text" class="form-control" id="judul_kegiatan"
+                                                            name="judul_kegiatan" placeholder="Judul"
+                                                            value="{{ dokumentasi.judul_kegiatan }}" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editDeskripsi" class="form-label">Deskripsi</label>
+                                                        <textarea class="form-control" id="deskripsi_kegiatan"
+                                                            name="deskripsi_kegiatan" rows="3"
+                                                            required>{{ dokumentasi.deskripsi_kegiatan }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="editGambar" class="form-label">Gambar</label>
+                                                        <input type="file" class="form-control" id="foto_kegiatan"
+                                                            name="foto_kegiatan" accept="image/*">
+                                                        <input type="hidden" name="existing_foto_kegiatan"
+                                                            value="{{ dokumentasi.foto_kegiatan }}">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger" title="Hapus" data-bs-toggle="modal"
+                                    data-bs-target="#detailDeleteModal{{ dokumentasi._id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                        <path
+                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                    </svg>
+                                </button>
+                                <!-- Delete Data Modal -->
+                                <div class="modal fade" id="detailDeleteModal{{ dokumentasi._id }}" tabindex="-1"
+                                    aria-labelledby="detailDeleteModalLabel{{ dokumentasi._id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered delete-modal">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete this data "{{
+                                                    dokumentasi.judul_kegiatan }}"?</p>
+                                            </div>
+                                            <form action="/delete" method="POST">
+                                                <input type="hidden" name="doc_id" value="{{ dokumentasi._id }}">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Data Modal -->
+    <div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered add-modal"> 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDataModalLabel">Add Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addKegiatanForm" method="POST" action="{{ url_for('add_kegiatan') }}"
+                        enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="judul_kegiatan" class="form-label">Judul Kegiatan</label>
+                            <input type="text" class="form-control" id="judul_kegiatan" name="judul_kegiatan"
+                                placeholder="Judul Kegiatan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deskripsi_kegiatan" class="form-label">Deskripsi Kegiatan</label>
+                            <textarea class="form-control" id="deskripsi_kegiatan" name="deskripsi_kegiatan" rows="3"
+                                required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="foto_kegiatan" class="form-label">Gambar Kegiatan</label>
+                            <input type="file" class="form-control" id="foto_kegiatan" name="foto_kegiatan"
+                                accept="image/*" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success"
+                        onclick="document.getElementById('addKegiatanForm').submit();">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-white" style="background-color: #45526e">
+        <!-- Grid container -->
+        <div class="container">
+            <!-- Section: Links -->
+            <section class="first mt-0">
+                <!-- Grid row-->
+                <div class="row text-center d-flex justify-content-center pt-5">
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">KKN 45 UNHAZ</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">KANTOR DESA SONGAK</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">LEMBAGA ADAT</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">KARANG TARUNA</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">REMAJA MASJID</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row-->
+            </section>
+            <!-- Section: Links -->
+
+            <hr class="my-5" />
+
+            <!-- Section: Text -->
+            <section class="second mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <p>
+                            Ning Budaya Songak adalah platform digital yang didedikasikan untuk
+                            mendokumentasikan dan
+                            melestarikan kekayaan budaya Desa Songak. Di sini, Anda akan menemukan berbagai
+                            informasi
+                            menarik, mulai dari sejarah desa, adat istiadat, hingga kesenian tradisional.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- Section: Text -->
+
+            <!-- Section: Social -->
+            <section class="three text-center mb-5">
+                <a href="https://api.whatsapp.com/send?phone=6285931527148&text=Halo%20ini%20adalah%20website%20kami"><img
+                        src="../static/wa.png" alt="Phone Icon" width="40px" height="40px"></a>
+                <a href="https://www.instagram.com/remas_songak/"><img src="../static/ig.png" alt="Instagram"
+                        width="40px" height="40px"></a>
+                <a href="https://www.facebook.com/remaja.songak"><img src="../static/fb.png" alt="Facebook" width="40px"
+                        height="40px"></a>
+                <a href="http://www.youtube.com/@fathyahmad4404"><img src="../static/youtube.png" alt="YouTube"
+                        width="40px" height="40px"></a>
+                <a href="https://www.google.com/maps/place/Keselet,+Jl.+Sangapati,+Kec.+Sakra,+Kabupaten+Lombok+Timur,+Nusa+Tenggara+Bar.+83671"
+                    target="_blank">
+                    <img src="../static/map.png" alt="Location" width="40px" height="40px">
+                </a>
+            </section>
+            <!-- Section: Social -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="four text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2024 Copyright by kkn bindes 45 unhaz
+        </div>
+        <!-- Copyright -->
+    </footer>
+</body>
+
+</html>

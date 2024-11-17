@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ning Budaya Songak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='logo.png') }}" rel="icon" type="image/x-icon" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Russo One:300,300i,400,400i,600,600i,700,700i|Jersey 20:300,300i,400,400i,600,600i,700,700i|EB Garamond:300,300i,400,400i,600,600i,700,700i|Cormorant Garamond:300,300i,400,400i,600,600i,700,700i"
+        rel="stylesheet">
+    <style>
+        .navbar-brand {
+            font-family: "Russo One", sans-serif;
+            font-size: 30px;
+        }
+
+        .nav-item .nav-link {
+            font-family: "Russo One", sans-serif;
+            font-size: 18px;
+        }
+
+        .navbar {
+            background-color: hsl(0, 0%, 100%) !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-toggler {
+            border: 2px solid rgb(255, 255, 255);
+            background-color: rgba(45, 83, 4, 0.397);
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after,
+        .navbar-toggler-icon div {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+        }
+
+        .navbar-toggler-icon::before {
+            top: 6px;
+        }
+
+        .navbar-toggler-icon::after {
+            bottom: 6px;
+        }
+
+        .navbar-toggler-icon div {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dropdown-menu {
+            max-width: 300px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            font-family: "Jersey 20", sans-serif;
+            font-size: 20px;
+        }
+
+        .dropdown-item {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .first {
+            font-family: "Itim", cursive;
+        }
+
+        .second {
+            font-family: "EB Garamond", serif;
+            font-size: 20px;
+        }
+
+        .four {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 20px;
+        }
+
+        .postcard {
+            flex-wrap: wrap;
+            display: flex;
+            box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
+            border-radius: 10px;
+            margin: 0 0 2rem 0;
+            overflow: hidden;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .postcard.dark {
+            background-color: #18151f;
+        }
+
+        .postcard.light {
+            background-color: #e1e5ea;
+        }
+
+        .t-dark {
+            color: #18151f;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        h1,
+        .h1 {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-left: 10p;
+        }
+
+        .small {
+            font-size: 80%;
+        }
+
+        .postcard__title {
+            font-size: 1.75rem;
+        }
+
+        .postcard__img {
+            max-height: 180px;
+            width: 100%;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .postcard__img_link {
+            display: contents;
+        }
+
+        .postcard__bar {
+            width: 50px;
+            height: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #90cdeb;
+            transition: width 0.2s ease;
+        }
+
+        .postcard__text {
+            padding: 1.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .postcard__preview-txt {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: justify;
+            height: 100%;
+        }
+
+        .postcard__tagbox {
+            display: flex;
+            flex-flow: row wrap;
+            font-size: 14px;
+            margin: 20px 0 0 0;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .tag__item {
+            display: inline-block;
+            background: rgb(255, 255, 255);
+            color: black;
+            font-style: italic;
+            border-radius: 3px;
+            padding: 2.5px 10px;
+            margin: 0 5px 5px 0;
+            cursor: default;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+
+        .tag__item:hover {
+            background: rgb(126, 126, 126);
+            color: rgb(255, 255, 255);
+        }
+
+        .postcard:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: linear-gradient(-70deg, #4b4dbc, transparent 50%);
+            opacity: 1;
+            border-radius: 10px;
+        }
+
+        .postcard:hover .postcard__bar {
+            width: 100px;
+        }
+
+        .tex {
+            margin-left: 6px;
+        }
+
+        @media screen and (min-width: 769px) {
+            .postcard {
+                flex-wrap: inherit;
+            }
+
+            .postcard__title {
+                font-size: 2rem;
+            }
+
+            .postcard__tagbox {
+                justify-content: start;
+            }
+
+            .postcard__img {
+                max-width: 300px;
+                max-height: 100%;
+                transition: transform 0.3s ease;
+            }
+
+            .postcard__text {
+                padding: 3rem;
+                width: 100%;
+            }
+
+            .media.postcard__text:before {
+                content: "";
+                position: absolute;
+                display: block;
+                background: #18151f;
+                top: -20%;
+                height: 130%;
+                width: 55px;
+            }
+
+            .postcard:hover .postcard__img {
+                transform: scale(1.1);
+            }
+
+            .postcard:nth-child(2n+1) {
+                flex-direction: row;
+            }
+
+            .postcard:nth-child(2n+0) {
+                flex-direction: row-reverse;
+            }
+
+            .postcard:nth-child(2n+1) .postcard__text::before {
+                left: -12px !important;
+                transform: rotate(4deg);
+            }
+
+            .postcard:nth-child(2n+0) .postcard__text::before {
+                right: -12px !important;
+                transform: rotate(-4deg);
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .postcard__text {
+                padding: 2rem 3.5rem;
+            }
+
+            .postcard__text:before {
+                content: "";
+                position: absolute;
+                display: block;
+                top: -20%;
+                height: 130%;
+                width: 55px;
+            }
+
+            .postcard.dark .postcard__text:before {
+                background: #18151f;
+            }
+
+            .postcard.light .postcard__text:before {
+                background: #e1e5ea;
+            }
+        }
+
+        .postcard .postcard__tagbox .green.play:hover {
+            background: main-green;
+            color: black;
+        }
+
+        .green .postcard__title:hover {
+            color: #8b1f1f;
+        }
+
+        .green .tag__item:hover {
+            background: main-green;
+            color: black;
+        }
+
+        .green .postcard:hover .postcard__bar {
+            background-color: #ffffff;
+        }
+
+        .main-green {
+            color: #17aa28;
+        }
+
+        .green .postcard__bar {
+            background-color: #11be2e;
+        }
+
+        .icon {
+            margin-right: 10px;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <img src="../static/logo.png" alt="" width="50" height="50" style="padding: 0; color:rgb(0, 0, 0)">
+                <a class="navbar-brand">Ning Budaya Songak</a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="budayaDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(0, 0, 0)">
+                            Budaya
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a href="/sejarah-songak" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-globe-asia-australia" viewBox="0 0 16 16">
+                                        <path
+                                            d="m10.495 6.92 1.278-.619a.483.483 0 0 0 .126-.782c-.252-.244-.682-.139-.932.107-.23.226-.513.373-.816.53l-.102.054c-.338.178-.264.626.1.736a.48.48 0 0 0 .346-.027ZM7.741 9.808V9.78a.413.413 0 1 1 .783.183l-.22.443a.6.6 0 0 1-.12.167l-.193.185a.36.36 0 1 1-.5-.516l.112-.108a.45.45 0 0 0 .138-.326M5.672 12.5l.482.233A.386.386 0 1 0 6.32 12h-.416a.7.7 0 0 1-.419-.139l-.277-.206a.302.302 0 1 0-.298.52z" />
+                                        <path
+                                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1.612 10.867l.756-1.288a1 1 0 0 1 1.545-.225l1.074 1.005a.986.986 0 0 0 1.36-.011l.038-.037a.88.88 0 0 0 .26-.755c-.075-.548.37-1.033.92-1.099.728-.086 1.587-.324 1.728-.957.086-.386-.114-.83-.361-1.2-.207-.312 0-.8.374-.8.123 0 .24-.055.318-.15l.393-.474c.196-.237.491-.368.797-.403.554-.064 1.407-.277 1.583-.973.098-.391-.192-.634-.484-.88-.254-.212-.51-.426-.515-.741a7 7 0 0 1 3.425 7.692 1 1 0 0 0-.087-.063l-.316-.204a1 1 0 0 0-.977-.06l-.169.082a1 1 0 0 1-.741.051l-1.021-.329A1 1 0 0 0 11.205 9h-.165a1 1 0 0 0-.945.674l-.172.499a1 1 0 0 1-.404.514l-.802.518a1 1 0 0 0-.458.84v.455a1 1 0 0 0 1 1h.257a1 1 0 0 1 .542.16l.762.49a1 1 0 0 0 .283.126 7 7 0 0 1-9.49-3.409Z" />
+                                    </svg> <b>Sejarah</b>
+                                </a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a href="/adat" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z" />
+                                        <path
+                                            d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+                                        <path
+                                            d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+                                    </svg> <b>Adat</b>
+                                </a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a href="/kesenian" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-image-alt" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0m4.225 4.053a.5.5 0 0 0-.577.093l-3.71 4.71-2.66-2.772a.5.5 0 0 0-.63.062L.002 13v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4.5z" />
+                                    </svg> <b>Kesenian</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/postingan">Postingan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(0, 0, 0)">
+                            <i class="fa-solid fa-user"></i> Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if not logged_in %}
+                            <li>
+                                <a href="/signin" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(0, 0, 0)" width="25"
+                                        height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                        <path
+                                            d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z " />
+                                    </svg> Login
+                                </a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="/logout" class="dropdown-item" style="color:rgb(0, 0, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="color:rgb(0, 0, 0)" width="25"
+                                        height="25" fill="currentColor" class="bi bi-box-arrow-right"
+                                        viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                        <path fill-rule="evenodd"
+                                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                                    </svg> Logout
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5 pt-5">
+        <section class="dark">
+            <div class="container py-4">
+                <article class="postcard dark blue">
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="../static/staf.jpeg" alt="Image Title" />
+                    </a>
+                    <div class="postcard__text">
+                        <h1 class="postcard__title blue"><a href="#">Kantor Desa</a></h1>
+                        <div class="postcard__subtitle small">
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt">Kantor Desa Songak merupakan pusat layanan administratif yang
+                            berperan penting dalam mendukung perkembangan dan kesejahteraan masyarakat Desa Songak.
+                            Terletak di jantung desa, kantor ini menjadi tempat bagi warga untuk mengakses berbagai
+                            layanan publik, mulai dari administrasi kependudukan, perizinan, hingga program-program
+                            pemberdayaan masyarakat.</div>
+                        <ul class="postcard__tagbox">
+                            <a class="tag__item" href="/staf" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                                Lihat Detail
+                            </a>
+                        </ul>
+                    </div>
+                </article>
+                <article class="postcard dark red">
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="../static/slide3.jpeg" alt="Image Title" />
+                    </a>
+                    <div class="postcard__text">
+                        <h1 class="postcard__title red"><a href="#">Lembaga Adat</a></h1>
+                        <div class="postcard__subtitle small">
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt">Lembaga Adat Desa Songak merupakan wadah yang bertanggung
+                            jawab
+                            untuk menjaga dan melestarikan nilai-nilai tradisi serta adat istiadat yang telah diwariskan
+                            turun-temurun di Desa Songak. Sebagai bagian integral dari kehidupan sosial masyarakat,
+                            lembaga ini berperan dalam menjaga keharmonisan, menyelesaikan permasalahan, serta menjadi
+                            penuntun dalam menjalankan kehidupan adat yang selaras dengan perkembangan zaman.</div>
+                        <ul class="postcard__tagbox">
+                            <a class="tag__item" href="/lembaga_adat" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                                Lihat Detail
+                            </a>
+                        </ul>
+                    </div>
+                </article>
+                <article class="postcard dark red">
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="../static/karta.jpeg" alt="Image Title" />
+                    </a>
+                    <div class="postcard__text">
+                        <h1 class="postcard__title red"><a href="#">Karang Taruna</a></h1>
+                        <div class="postcard__subtitle small">
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt">Karang Taruna Desa Songak adalah organisasi pemuda yang
+                            berperan aktif dalam membangun dan memberdayakan masyarakat, serta menjadi wadah kreativitas
+                            dan semangat gotong royong bagi generasi muda di desa ini. Sebagai organisasi yang berbasis
+                            pada kepemudaan, Karang Taruna Desa Songak hadir untuk mendukung berbagai program sosial,
+                            budaya, dan pembangunan yang berdampak positif bagi kemajuan desa.</div>
+                        <ul class="postcard__tagbox">
+                            <a class="tag__item" href="/karta" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                                Lihat Detail
+                            </a>
+                        </ul>
+                    </div>
+                </article>
+                <article class="postcard dark red">
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="../static/remas.jpeg" alt="Image Title" />
+                    </a>
+                    <div class="postcard__text">
+                        <h1 class="postcard__title red"><a href="#">Remaja Masjid</a></h1>
+                        <div class="postcard__subtitle small">
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt">Remaja Masjid Desa Songak adalah wadah bagi pemuda-pemudi
+                            desa yang ingin mengembangkan potensi diri melalui kegiatan keagamaan dan sosial yang
+                            bermanfaat. Sebagai bagian dari peran aktif remaja dalam menjaga tradisi agama, organisasi
+                            ini berfokus pada pembinaan akhlak, pengetahuan agama, serta keterlibatan dalam kegiatan
+                            sosial yang berlandaskan pada nilai-nilai Islam.</div>
+                        <ul class="postcard__tagbox">
+                            <a class="tag__item" href="/remas" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                                Lihat Detail
+                            </a>
+                        </ul>
+                    </div>
+                </article>
+                <article class="postcard dark red">
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="../static/kkn.jpeg" alt="Image Title" />
+                    </a>
+                    <div class="postcard__text">
+                        <h1 class="postcard__title red"><a href="#">KKN 45</a></h1>
+                        <div class="postcard__subtitle small">
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt">KKN 45 Universitas Hamzanwadi adalah program pengabdian
+                            masyarakat yang melibatkan mahasiswa Universitas Hamzanwadi
+                            untuk berpartisipasi aktif dalam berbagai kegiatan yang bertujuan untuk memajukan dan
+                            meningkatkan kesejahteraan masyarakat terutama di Desa Songak. Program ini merupakan bagian
+                            dari
+                            komitmen universitas dalam memberdayakan masyarakat melalui kolaborasi antara dunia
+                            pendidikan dan komunitas lokal.</div>
+                        <ul class="postcard__tagbox">
+                            <a class="tag__item" href="/kkn" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                                Lihat Detail
+                            </a>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center text-white" style="background-color: #45526e">
+        <!-- Grid container -->
+        <div class="container">
+            <!-- Section: Links -->
+            <section class="first mt-0">
+                <!-- Grid row-->
+                <div class="row text-center d-flex justify-content-center pt-5">
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">KKN 45 UNHAZ</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">KANTOR DESA SONGAK</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">LEMBAGA ADAT</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">KARANG TARUNA</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <p class="text-white">REMAJA MASJID</p>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row-->
+            </section>
+            <!-- Section: Links -->
+
+            <hr class="my-5" />
+
+            <!-- Section: Text -->
+            <section class="second mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <p>
+                            Ning Budaya Songak adalah platform digital yang didedikasikan untuk mendokumentasikan dan
+                            melestarikan kekayaan budaya Desa Songak. Di sini, Anda akan menemukan berbagai informasi
+                            menarik, mulai dari sejarah desa, adat istiadat, hingga kesenian tradisional.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- Section: Text -->
+
+            <!-- Section: Social -->
+            <section class="three text-center mb-5">
+                <a href="https://api.whatsapp.com/send?phone=6285931527148&text=Halo%20ini%20adalah%20website%20kami"><img
+                        src="../static/wa.png" alt="Phone Icon" width="40px" height="40px"></a>
+                <a href="https://www.instagram.com/remas_songak/"><img src="../static/ig.png" alt="Instagram"
+                        width="40px" height="40px"></a>
+                <a href="https://www.facebook.com/remaja.songak"><img src="../static/fb.png" alt="Facebook" width="40px"
+                        height="40px"></a>
+                <a href="http://www.youtube.com/@fathyahmad4404"><img src="../static/youtube.png" alt="YouTube"
+                        width="40px" height="40px"></a>
+                <a href="https://www.google.com/maps/place/Keselet,+Jl.+Sangapati,+Kec.+Sakra,+Kabupaten+Lombok+Timur,+Nusa+Tenggara+Bar.+83671"
+                    target="_blank">
+                    <img src="../static/map.png" alt="Location" width="40px" height="40px">
+                </a>
+            </section>
+            <!-- Section: Social -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="four text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2024 Copyright by kkn bindes 45 unhaz
+        </div>
+        <!-- Copyright -->
+    </footer>
+</body>
+
+</html>
